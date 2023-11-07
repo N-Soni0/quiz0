@@ -1,26 +1,24 @@
-import { collection, addDoc as firestoreAddDoc } from 'firebase/firestore';
-import { CollectionPath, FirebaseEntityType } from '../types';
-import { CreateQuestionDoc } from '../types/entities/question';
-import { CreateTestDoc } from '../types/entities/test';
+import {
+	collection,
+	addDoc as firestoreAddDoc,
+	serverTimestamp,
+} from 'firebase/firestore';
 import { firestore } from '..';
 
-type FirebaseCreateDoc<T extends FirebaseEntityType> =
-	T extends FirebaseEntityType.Test
-		? CreateTestDoc
-		: T extends FirebaseEntityType.Question
-		? CreateQuestionDoc
-		: never;
-
-export async function addDoc<T extends FirebaseEntityType>(
-	path: CollectionPath<T>,
-	data: FirebaseCreateDoc<T>
+export async function addDoc<TPath extends string, TData>(
+	path: TPath,
+	data: TData
 ): Promise<Maybe<Id>> {
 	try {
-		const docRef = collection(firestore, path);
+		const collectionRef = collection(firestore, path);
 
-		const result = await firestoreAddDoc(docRef, data);
+		const result = await firestoreAddDoc(collectionRef, {
+			...data,
+			updatedAt: serverTimestamp(),
+			createdAt: serverTimestamp(),
+		});
 		return result.id;
 	} catch (error) {
-		console.log(`Error adding document to collection: ${path}`);
+		console.error(`Could not add document into collection: ${path}`, error);
 	}
 }

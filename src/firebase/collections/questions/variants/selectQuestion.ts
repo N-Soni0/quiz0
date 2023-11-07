@@ -1,4 +1,4 @@
-import { BaseQuestion, QuestionType } from ".";
+import { BaseQuestion, QuestionType } from "../types";
 
 export type SelectQuestion = BaseQuestion & {
     // Sepcify distinct type
