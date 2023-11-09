@@ -13,7 +13,7 @@ const FeatureCard = ({ title, content, children, icon }: Props) => {
 	return (
 		<li className='border flex items-center p-4 justify-between relative bg-card rounded-lg duration-200 text-foreground shadow-sm h-[5.2rem]'>
 			<div className='flex items-center gap-3'>
-				<div className='bg-primary flex items-center justify-center w-12 h-12 rounded-sm'>
+				<div className='bg-primary text-primary-foreground flex items-center justify-center w-12 h-12 rounded-sm'>
 					{icon}
 				</div>
 				<div className='max-w-[70%]'>

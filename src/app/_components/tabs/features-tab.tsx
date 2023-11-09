@@ -11,24 +11,14 @@ const FeaturesTab = () => {
 				<FeatureCard
 					title='Create'
 					content='Build tests with a hole bunch of different interactive questions'
-					icon={
-						<FiPlus
-							color={'black'}
-							size={'1.4rem'}
-						/>
-					}
+					icon={<FiPlus size={'1.4rem'} />}
 				/>
 				<FeatureCard
 					title='Find'
 					content={
 						'We support a rich base of different topics. You are likely to find topic you interested'
 					}
-					icon={
-						<FiSearch
-							color={'black'}
-							size={'1.4rem'}
-						/>
-					}
+					icon={<FiSearch size={'1.4rem'} />}
 				>
 					<Button
 						variant={'outline'}
@@ -45,12 +35,7 @@ const FeaturesTab = () => {
 				<FeatureCard
 					title='Share'
 					content='Involve friends and relatives by sharing your test'
-					icon={
-						<FiShare2
-							color={'black'}
-							size={'1.4rem'}
-						/>
-					}
+					icon={<FiShare2 size={'1.4rem'} />}
 				/>
 			</ul>
 		</div>
