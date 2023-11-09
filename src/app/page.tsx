@@ -1,14 +1,14 @@
-import { Button } from '@/components/ui/button';
-import { SignUpButton, UserButton } from '@clerk/nextjs';
+import TabsSection from './_components/tabs-section';
 
 export default function Home() {
 	return (
-		<div>
-			<UserButton />
+		<main className='grid grid-cols-2 flex-1 h-full'>
+			<div className='px-12 py-8 h-full flex items-center flex-col justify-center grid-start'>
+				<h1 className='text-8xl -translate-y-12 tracking-wide '>Quiz0</h1>
+			
+			</div>
 
-			<SignUpButton>
-				<Button>Sign up</Button>
-			</SignUpButton>
-		</div>
+			<TabsSection />
+		</main>
 	);
 }
