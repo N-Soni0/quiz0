@@ -17,7 +17,7 @@ const ProfileLink = () => {
 				href={'/profile'}
 				className='flex items-center gap-3'
 			>
-				<h4>{user?.username}</h4>
+				<h4 className='text-foreground'>{user?.username}</h4>
 				<Avatar>
 					<AvatarImage src={user?.imageUrl} />
 					<AvatarFallback>{user?.username?.[0]}</AvatarFallback>
