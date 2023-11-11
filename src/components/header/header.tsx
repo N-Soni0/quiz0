@@ -3,6 +3,7 @@ import HeaderNavBar from './header-nav-bar';
 import ProfileLink from './profile-link';
 import ThemeSwitch from './theme-switch';
 import Image from 'next/image';
+import Logo from '../logo';
 
 const Header = () => {
 
@@ -10,7 +11,7 @@ const Header = () => {
 		<div className='h-24'>
 			<div className='flex relative justify-between items-center container h-full'>
 				<Link href={'/'} className='text-4xl font-bold'>
-					<Image src={'/logo.svg'}  alt='logo' width={140} height={80}  />
+					<Logo className='w-40 fill-primary' />
 				</Link>
 
 				<HeaderNavBar />
