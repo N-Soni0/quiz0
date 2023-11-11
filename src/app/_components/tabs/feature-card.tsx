@@ -17,7 +17,7 @@ const FeatureCard = ({ title, content, children, icon }: Props) => {
 					{icon}
 				</div>
 				<div className='max-w-[70%]'>
-					<h3 className='text-lg whitespace-nowrap'>{title}</h3>
+					<h4 className='text-lg whitespace-nowrap'>{title}</h4>
 					<p className='text-xs opacity-60 '>{content}</p>
 				</div>
 			</div>

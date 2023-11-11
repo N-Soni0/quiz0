@@ -1,14 +1,14 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
+import { SignOutButton, SignUpButton, useUser } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const ProfileLink = () => {
-	const { user } = useUser();
+	const { user, isSignedIn } = useUser();
 
-	return (
+	return isSignedIn ? (
 		<Button
 			variant={'ghost'}
 			className='h-fit'
@@ -23,6 +23,10 @@ const ProfileLink = () => {
 					<AvatarFallback>{user?.username?.[0]}</AvatarFallback>
 				</Avatar>
 			</Link>
+		</Button>
+	) : (
+		<Button>
+			<SignUpButton />
 		</Button>
 	);
 };
