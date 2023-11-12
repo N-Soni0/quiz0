@@ -27,9 +27,9 @@ export default async function Home() {
 			</div>
 
 			<div className='px-12 py-8 h-full flex items-center flex-col justify-between grid-start'>
-				<div className='relative -bottom-28'>
+				<div className='relative -bottom-40'>
 					<Logo className='w-60 fill-primary' />
-					<p className='text-bold text-sm absolute -right-4 bottom-0'>
+					<p className='text-bold text-sm absolute -right-4 bottom-2'>
 						Testing platform
 					</p>
 				</div>

@@ -5,19 +5,13 @@ import Link from 'next/link';
 
 const ContactTab = () => {
 	return (
-		<div className='w-full flex justify-between p-4 '>
+		<div className='w-full flex justify-between p-4 h-full'>
 			<div className='w-[40%]'>
 				<h4 className='text text-center mb-2'>Share feedback with us</h4>
 
 				<FeedbackForm />
 			</div>
-
-			<div className='w-1 h-full flex flex-col justify-between'>
-				<div className='w-full h-6 bg-accent'></div>
-				<div className='w-full h-6 bg-accent'></div>
-				<div className='w-full h-6 bg-accent'></div>
-			</div>
-
+			
 			<div className='w-[40%]'>
 				<h4 className='text text-center mb-2'>Write a message directly</h4>
 
