@@ -1,8 +1,18 @@
 import Link from 'next/link';
 import TabsSection from './_components/tabs-section';
-import ContactSection from './_components/contact-section';
+import Logo from '@/components/logo';
+import prisma from '../../prisma/client';
 
-export default function Home() {
+async function addFeedback() {
+	return await prisma.feedback.create({
+		data: {
+			content: `Hello ${new Date()}`,
+		},
+	});
+}
+
+export default async function Home() {
+
 	return (
 		<main className='grid relative grid-cols-2 flex-1 h-full'>
 			{/* Dashed line */}
@@ -17,11 +27,15 @@ export default function Home() {
 			</div>
 
 			<div className='px-12 py-8 h-full flex items-center flex-col justify-between grid-start'>
-				<h1>Quiz</h1>
-				<ContactSection />
+				<div className='relative -bottom-28'>
+					<Logo className='w-60 fill-primary' />
+					<p className='text-bold text-sm absolute -right-4 bottom-0'>
+						Testing platform
+					</p>
+				</div>
+				
 			</div>
-		
-			
+
 			<TabsSection />
 		</main>
 	);

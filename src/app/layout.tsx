@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/header';
 import { Toaster } from '@/components/ui/toaster';
+import QueryProvider from '@/components/query-provider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,17 +25,19 @@ export default function RootLayout({
 				<body
 					className={`min-h-screen  h-screen bg-background flex flex-col overflow-hidden ${inter.className}`}
 				>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						enableSystem
-						disableTransitionOnChange
-					>
-						<Header />
-						{children}
+					<QueryProvider>
+						<ThemeProvider
+							attribute='class'
+							defaultTheme='system'
+							enableSystem
+							disableTransitionOnChange
+						>
+							<Header />
+							{children}
 
-						<Toaster />
-					</ThemeProvider>
+							<Toaster />
+						</ThemeProvider>
+					</QueryProvider>
 				</body>
 			</html>
 		</ClerkProvider>
