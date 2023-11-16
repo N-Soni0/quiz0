@@ -2,7 +2,7 @@ import { BaseQuestion, QuestionType } from '../types';
 
 export type MutlipleSelectQuestion = BaseQuestion & {
 	// Sepcify distinct type
-	type: QuestionType.MutlipleSelect;
+	type: 'multiple-select';
 
 	options: Array<{
 		text: string;

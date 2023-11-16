@@ -21,8 +21,11 @@ export type BaseQuestion = {
 export type Question = SelectQuestion | MutlipleSelectQuestion;
 export type Answer = SelectQuestionAnswer | MutlipleSelectQuestionAnswer;
 
+export type QuestionType = 'select' | 'multiple-select';
 
-export enum QuestionType {
-	Select,
-	MutlipleSelect,
-}
+// Utility types
+export type QuestionData<T extends QuestionType> = T extends 'select'
+	? SelectQuestion
+	: T extends 'multiple-select'
+	? MutlipleSelectQuestion
+	: never;

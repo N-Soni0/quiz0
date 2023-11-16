@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { QuestionSchema } from './question-schema';
 import { createUnionSchema } from '@/lib/zod/zodCreateManyUnion'
 import { testTopics } from '@/constants/testTopics';
+import { QuestionSchema } from '@/components/questions/forms';
 
 const TopicShema = createUnionSchema(testTopics);
 

@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { FormProvider, useForm } from 'react-hook-form';
-import { TestFormData, testFormSchema } from '../_schemas';
+import { TestFormData, testFormSchema } from '../schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	Form,
@@ -21,7 +21,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { testTopics, testTopicsNames } from '@/constants/testTopics';
-import QuestionForm from './questions-forms/question-form';
+import QuestionDialog from './question-dialog';
 
 const TestForm = () => {
 	const formController = useForm<TestFormData>({
@@ -91,11 +91,24 @@ const TestForm = () => {
 							/>
 						</div>
 
-						<div className='w-full'>
-							{questions.map(question => (
-								<div key={question.title}>{question.title} - {question.type}</div>
-							))}
-							<QuestionForm index={questions.length} />
+						<div className='w-full flex justify-center items-center flex-col'>
+							<div>
+								{questions.map((question, index) => (
+									<QuestionDialog
+										key={index}
+										index={index}
+										initialValues={question}
+									>
+										<Button>
+											{question.type} - {question.title}
+										</Button>
+									</QuestionDialog>
+								))}
+							</div>
+
+							<QuestionDialog index={questions.length}>
+								<Button>Add</Button>
+							</QuestionDialog>
 						</div>
 					</div>
 

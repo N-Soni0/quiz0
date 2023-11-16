@@ -2,7 +2,7 @@ import { BaseQuestion, QuestionType } from "../types";
 
 export type SelectQuestion = BaseQuestion & {
     // Sepcify distinct type
-    type: QuestionType.Select;
+    type: 'select';
 
     options: Array<{
         text: string;
