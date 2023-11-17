@@ -4,36 +4,36 @@ import {
 	DialogHeader,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { questionTypes } from '@/constants/questionTypes';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTestFormContext } from '../_hooks/use-test-form-context';
 import QuestionTypeSelector from './question-type-selector';
 import { Button } from '@/components/ui/button';
 import { FiEye, FiChevronLeft, FiEdit } from 'react-icons/fi';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuestionForm, QuestionSchema } from '@/components/questions/forms';
+import { QuestionType } from '@/firebase/collections/questions';
 import { z } from 'zod';
 
 type Props = {
 	index: number;
-	initialValues?: Maybe<z.infer<typeof QuestionSchema>>
+	initialValues?: Maybe<z.infer<typeof QuestionSchema>>;
 	children: React.ReactNode;
 };
 
 const QuestionDialog = ({ index, children, initialValues }: Props) => {
 	const { setValue } = useTestFormContext();
-	const [selectedType, setSelectedType] = useState<
-		Maybe<(typeof questionTypes)[number]>
-	>(initialValues?.type);
+	const [selectedType, setSelectedType] = useState<Maybe<QuestionType>>(
+		initialValues?.type
+	);
 
 	return (
-		<Dialog onOpenChange={(isOpen) => {
-			if (isOpen) {
-				setSelectedType(initialValues?.type)
-			} else {
-
-			}
-		}}>
+		<Dialog
+			onOpenChange={(isOpen) => {
+				if (isOpen) {
+					setSelectedType(initialValues?.type);
+				}
+			}}
+		>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 
 			<DialogContent>

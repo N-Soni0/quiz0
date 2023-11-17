@@ -6,10 +6,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { questionTypes, questionTypesNames } from '@/constants/questionTypes';
+import { QuestionType } from '@/firebase/collections/questions';
+import { QUESTIONS_DISPLAY_TEXT } from '@/constants/questions';
+
 
 type Props = {
-	onSelect: (type: (typeof questionTypes)[number]) => void;
+	onSelect: (type: QuestionType) => void;
 };
 
 const QuestionTypeSelector = ({ onSelect }: Props) => {
@@ -19,12 +21,12 @@ const QuestionTypeSelector = ({ onSelect }: Props) => {
 				<SelectValue placeholder='Question Type' />
 			</SelectTrigger>
 			<SelectContent>
-				{questionTypes.map((type) => (
+				{Object.entries(QUESTIONS_DISPLAY_TEXT).map(([type, text]) => (
 					<SelectItem
 						key={type}
 						value={type}
 					>
-						{questionTypesNames[type]}
+						{text}
 					</SelectItem>
 				))}
 			</SelectContent>
