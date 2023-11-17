@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/select';
 import { testTopics, testTopicsNames } from '@/constants/testTopics';
 import QuestionDialog from './question-dialog';
+import { QUESTIONS_DISPLAY_TEXT } from '@/constants/questions';
 
 const TestForm = () => {
 	const formController = useForm<TestFormData>({
@@ -91,16 +92,30 @@ const TestForm = () => {
 							/>
 						</div>
 
-						<div className='w-full flex justify-center items-center flex-col'>
-							<div>
+						<div className='w-full grid justify-center items-center flex-col'>
+							<div className='w-full grid grid-cols-2 gap-3 mb-3'>
 								{questions.map((question, index) => (
 									<QuestionDialog
 										key={index}
 										index={index}
 										initialValues={question}
 									>
-										<Button>
-											{question.type} - {question.title}
+										<Button
+											variant={'outline'}
+											className='w-full h-fit	border-2'
+										>
+											<div className='w-full text-left '>
+												<h4 className='w-full text-lg mb-2 break-all max-h-full whitespace-normal leading-[120%]'>
+													<span className='font-bold'>№{index + 1}</span>{" "}
+													{question.title}
+												</h4>
+
+												<div className='flex w-full justify-between gap-3 items-center'>
+													<p className='text-sm'>Question type: </p>
+
+													<p>{QUESTIONS_DISPLAY_TEXT[question.type]}</p>
+												</div>
+											</div>
 										</Button>
 									</QuestionDialog>
 								))}
