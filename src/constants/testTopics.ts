@@ -1,3 +1,5 @@
+import { TestTopic } from "@/firebase/collections/tests/types";
+
 export const testTopics = [
 	'ai',
 	'math',
@@ -6,7 +8,7 @@ export const testTopics = [
 	'blockchain',
 ] as const;
 
-export const testTopicsNames: Record<(typeof testTopics)[number], string> = {
+export const testTopicsNames: Record<TestTopic, string> = {
 	ai: 'Artificial Intelligence',
 	math: 'Math',
 	cinema: 'Cinema',

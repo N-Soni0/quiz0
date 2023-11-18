@@ -10,7 +10,6 @@ import {
 
 export type BaseQuestion = {
 	id: Id;
-	testId: Id;
 
 	type: QuestionType;
 	text: string;
