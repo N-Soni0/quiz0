@@ -21,17 +21,26 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { testTopics, testTopicsNames } from '@/constants/testTopics';
-import QuestionDialog from './question-dialog';
-import { QUESTIONS_DISPLAY_TEXT } from '@/constants/questions';
 
-const TestForm = () => {
+import QuestionsSection from './questions-section';
+
+type Props = {
+	onSubmit?: (data: TestFormData) => void;
+};
+
+const TestForm = ({ onSubmit }: Props) => {
 	const formController = useForm<TestFormData>({
 		resolver: zodResolver(testFormSchema),
 		defaultValues: {
 			questions: [],
 		},
 	});
-	const { control, handleSubmit, formState: { errors } } = formController;
+	const {
+		control,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = formController;
 	const questions = formController.watch('questions');
 
 	return (
@@ -39,7 +48,10 @@ const TestForm = () => {
 			<Form {...formController}>
 				<form
 					className='px-20 h-full flex flex-col'
-					onSubmit={handleSubmit(() => {})}
+					onSubmit={handleSubmit((data) => {
+						onSubmit?.(data);
+						reset();
+					})}
 				>
 					<div className='grid grid-cols-2 gap-10'>
 						<div className='flex flex-col '>
