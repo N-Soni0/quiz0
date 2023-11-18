@@ -31,23 +31,23 @@ const TestForm = () => {
 			questions: [],
 		},
 	});
-	const { control, handleSubmit } = formController;
+	const { control, handleSubmit, formState: { errors } } = formController;
 	const questions = formController.watch('questions');
 
 	return (
 		<FormProvider {...formController}>
 			<Form {...formController}>
 				<form
-					className='px-20 h-full '
+					className='px-20 h-full flex flex-col'
 					onSubmit={handleSubmit(() => {})}
 				>
 					<div className='grid grid-cols-2 gap-10'>
-						<div className='flex flex-col flex-1'>
+						<div className='flex flex-col '>
 							<FormField
 								control={control}
 								name='title'
 								render={({ field }) => (
-									<FormItem className='flex-1'>
+									<FormItem className='mb-5'>
 										<FormLabel>Title</FormLabel>
 										<FormControl>
 											<Input
@@ -64,7 +64,7 @@ const TestForm = () => {
 								control={control}
 								name='topic'
 								render={({ field }) => (
-									<FormItem className='flex-1'>
+									<FormItem className=''>
 										<FormLabel>Topic</FormLabel>
 										<Select
 											onValueChange={field.onChange}
@@ -86,13 +86,16 @@ const TestForm = () => {
 												))}
 											</SelectContent>
 										</Select>
-										<FormMessage />
+
+										<p className='text-sm font-medium text-destructive'>
+											{errors.topic ? 'Select topic from the list' : null}
+										</p>
 									</FormItem>
 								)}
 							/>
 						</div>
 
-						<div className='w-full grid justify-center items-center flex-col'>
+						<div className='w-full flex justify-center items-center flex-col'>
 							<div className='w-full grid grid-cols-2 gap-3 mb-3'>
 								{questions.map((question, index) => (
 									<QuestionDialog
@@ -116,7 +119,7 @@ const TestForm = () => {
 												</div>
 
 												<div className='w-full justify-between gap-3 items-center'>
-													<p className='whitespace-normal break-all line-clamp-3'>
+													<p className='whitespace-normal h-10 break-all line-clamp-2'>
 														{question.text}
 													</p>
 												</div>
@@ -127,12 +130,12 @@ const TestForm = () => {
 							</div>
 
 							<QuestionDialog index={questions.length}>
-								<Button>Add</Button>
+								<Button variant={'secondary'} className='w-[30%]'>Add</Button>
 							</QuestionDialog>
 						</div>
 					</div>
 
-					<Button type='submit'>Submit</Button>
+					<Button className='block mx-auto mt-20' size={'lg'} type='submit'>Submit</Button>
 				</form>
 			</Form>
 		</FormProvider>
