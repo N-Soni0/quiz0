@@ -16,20 +16,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogClose } from '@/components/ui/dialog';
 import { MultipleSelectQuestionSchema } from './schema';
 import SelectOption from '../select-question-form/select-option';
+import { Textarea } from '@/components/ui/textarea';
 
 type FormData = z.infer<typeof MultipleSelectQuestionSchema>;
 type Props = {
 	initialValues?: Partial<FormData>;
 	onSubmit?: (data: FormData) => void;
-};	
+};
 
 const MultipleSelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 	const formControls = useForm<FormData>({
 		resolver: zodResolver(MultipleSelectQuestionSchema),
 		mode: 'onChange',
 		defaultValues: {
-			options: [{ isCorrect: false, title: '' }],
-			title: '',
+			options: [{ isCorrect: false, text: '' }],
+			text: '',
 			type: 'multiple-select',
 			...initialValues,
 		},
@@ -51,14 +52,14 @@ const MultipleSelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 			<div>
 				<FormField
 					control={control}
-					name={`title`}
+					name={`text`}
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Title</FormLabel>
+							<FormLabel>Text</FormLabel>
 
 							<FormControl>
-								<Input
-									placeholder='Title'
+								<Textarea
+									className='resize-none'
 									{...field}
 								/>
 							</FormControl>
@@ -80,7 +81,7 @@ const MultipleSelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 								<Button
 									variant={'secondary'}
 									onClick={() => {
-										append({ isCorrect: false, title: '' });
+										append({ isCorrect: false, text: '' });
 									}}
 								>
 									+ Option

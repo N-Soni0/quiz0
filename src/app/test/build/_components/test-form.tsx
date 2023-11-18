@@ -102,18 +102,23 @@ const TestForm = () => {
 									>
 										<Button
 											variant={'outline'}
-											className='w-full h-fit	border-2'
+											className='w-full z-0 relative h-fit border-2'
 										>
 											<div className='w-full text-left '>
-												<h4 className='w-full text-lg mb-2 break-all max-h-full whitespace-normal leading-[120%]'>
-													<span className='font-bold'>№{index + 1}</span>{" "}
-													{question.title}
-												</h4>
+												<div className='mb-2 '>
+													<h4 className='w-full text-lg font-bold'>
+														Question №{index + 1}
+													</h4>
 
-												<div className='flex w-full justify-between gap-3 items-center'>
-													<p className='text-sm'>Question type: </p>
+													<p className='text-primary/70'>
+														{QUESTIONS_DISPLAY_TEXT[question.type]}
+													</p>
+												</div>
 
-													<p>{QUESTIONS_DISPLAY_TEXT[question.type]}</p>
+												<div className='w-full justify-between gap-3 items-center'>
+													<p className='whitespace-normal break-all line-clamp-3'>
+														{question.text}
+													</p>
 												</div>
 											</div>
 										</Button>

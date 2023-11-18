@@ -1,21 +1,23 @@
 import { z } from 'zod';
+import { BaseQuestionSchema } from '../shared/schema';
 
 const OptionSchema = z.object({
-	title: z.string().min(1),
+	text: z.string().min(1),
 	isCorrect: z.boolean(),
 });
 
-export const SelectQuestionSchema = z.object({
-	title: z.string().min(2),
-	type: z.literal('select'),
-	options: z
-		.array(OptionSchema)
-		.min(1)
-		.max(6)
-		.refine(
-			(options) => {
-				return options.filter((option) => option.isCorrect).length === 1;
-			},
-			{ message: 'Only one answer can be correct' }
-		),
-});
+export const SelectQuestionSchema = z
+	.object({
+		type: z.literal('select'),
+		options: z
+			.array(OptionSchema)
+			.min(1)
+			.max(6)
+			.refine(
+				(options) => {
+					return options.filter((option) => option.isCorrect).length === 1;
+				},
+				{ message: 'Only one answer can be correct' }
+			),
+	})
+	.extend(BaseQuestionSchema);

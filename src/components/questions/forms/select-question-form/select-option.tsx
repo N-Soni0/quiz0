@@ -79,7 +79,7 @@ const SelectOption = function <T extends AcceptableControl>({
 
 				<FormField
 					control={control as Control<AcceptableControl>}
-					name={`options.${index}.title`}
+					name={`options.${index}.text`}
 					render={({ field }) => (
 						<FormItem className=''>
 							<FormControl>

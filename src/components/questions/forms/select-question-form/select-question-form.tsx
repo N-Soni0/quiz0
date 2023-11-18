@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogClose } from '@/components/ui/dialog';
 import SelectOption from './select-option';
 import { SelectQuestionSchema } from './schema';
+import { Textarea } from '@/components/ui/textarea';
 
 type FormData = z.infer<typeof SelectQuestionSchema>;
 type Props = {
@@ -28,8 +29,8 @@ const SelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 		resolver: zodResolver(SelectQuestionSchema),
 		mode: 'onChange',
 		defaultValues: {
-			options: [{ isCorrect: false, title: '' }],
-			title: '',
+			options: [{ isCorrect: false, text: '' }],
+			text: '',
 			type: 'select',
 			...initialValues,
 		},
@@ -51,14 +52,14 @@ const SelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 			<div>
 				<FormField
 					control={control}
-					name={`title`}
+					name={`text`}
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Title</FormLabel>
+							<FormLabel>Text</FormLabel>
 
 							<FormControl>
-								<Input
-									placeholder='Title'
+								<Textarea
+									className='resize-none'
 									{...field}
 								/>
 							</FormControl>
@@ -80,7 +81,7 @@ const SelectQuestionForm = ({ initialValues, onSubmit }: Props) => {
 								<Button
 									variant={'secondary'}
 									onClick={() => {
-										append({ isCorrect: false, title: '' });
+										append({ isCorrect: false, text: '' });
 									}}
 								>
 									+ Option
