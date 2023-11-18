@@ -5,20 +5,18 @@ import { QueryConstraint } from 'firebase/firestore';
 type TestsCollectionPath = '/tests';
 type TestDocumentPath = `${TestsCollectionPath}/${Id}`;
 
-type MutableData = Omit<Test, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>;
+type MutableData = Omit<Test, 'id' | 'createdAt' | 'updatedAt'>;
 
-export const getTestDoc = (path: TestDocumentPath) =>
-	getDoc<TestDocumentPath, Test>(path);
+export const getTestDoc = (testId: Id) =>
+	getDoc<TestDocumentPath, Test>(`/tests/${testId}`);
 
 export const getMultipleTestDocs = (
-	path: TestsCollectionPath,
 	...queries: Array<Maybe<QueryConstraint>>
-) => getMultipleDocs<TestsCollectionPath, Test>(path, ...queries);
+) => getMultipleDocs<TestsCollectionPath, Test>('/tests', ...queries);
 
-export const addTestDoc = (path: TestsCollectionPath, data: MutableData) =>
-	addDoc<TestsCollectionPath, MutableData>(path, data);
+export const addTestDoc = (data: MutableData) =>
+	addDoc<TestsCollectionPath, MutableData>('/tests', data);
 
-export const updateTestDoc = (function () {
-	return (path: TestDocumentPath, data: Partial<MutableData>) =>
-		updateDoc<TestDocumentPath, Partial<MutableData>>(path, data);
-})();
+type EditMutableData = Partial<Omit<MutableData, 'createdBy'>>;
+export const updateTestDoc = (testId: Id, data: EditMutableData) =>
+	updateDoc<TestDocumentPath, EditMutableData>(`/tests/${testId}`, data);
