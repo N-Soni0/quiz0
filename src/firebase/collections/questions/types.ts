@@ -13,14 +13,18 @@ export type BaseQuestion = {
 
 	type: QuestionType;
 	text: string;
-	createdAt: Timestamp;
-	updatedAt: Timestamp;
 };
 
 export type Question = SelectQuestion | MutlipleSelectQuestion;
 export type Answer = SelectQuestionAnswer | MutlipleSelectQuestionAnswer;
 
 export type QuestionType = 'select' | 'multiple-select';
+
+// Types for data mutation 
+export type AddQuestion = Omit<BaseQuestion, 'id'> & { [key: string]: any };
+export type UpdateQuestion = Partial<Omit<BaseQuestion, 'id' | 'type'> & {
+	[key: string]: any;
+}>;
 
 // Utility types
 export type QuestionData<T extends QuestionType> = T extends 'select'

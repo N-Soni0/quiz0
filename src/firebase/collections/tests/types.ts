@@ -1,4 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
 
 export type TestTopic = 'ai' | 'math' | 'cinema' | 'games' | 'blockchain';
 export type Test = {
@@ -6,7 +5,7 @@ export type Test = {
 	title: string;
 	topic: TestTopic;
 	createdBy: Id;
-	
-	createdAt: Timestamp;
-	updatedAt: Timestamp;
 };
+
+export type AddTest = Omit<Test, 'id'>;
+export type UpdateTest = Partial<Omit<Test, 'id' | 'createdBy'>>;

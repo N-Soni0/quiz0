@@ -1,7 +1,6 @@
 import {
 	doc,
 	updateDoc as firestoreUpdateDoc,
-	serverTimestamp,
 } from 'firebase/firestore';
 import { firestore } from '..';
 
@@ -12,7 +11,7 @@ export async function updateDoc<TPath extends string, TData extends object>(
 	try {
 		const docRef = doc(firestore, path);
 
-		await firestoreUpdateDoc(docRef, { ...data, updatedAt: serverTimestamp() });
+		await firestoreUpdateDoc(docRef, data);
 	} catch (error) {
 		console.error(`Could not update document with path: ${path}`, error);
 	}
