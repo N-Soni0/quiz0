@@ -2,32 +2,29 @@
 
 import React from 'react';
 import TestForm from './_components/test-form';
-import { addTestDoc } from '@/firebase/collections/tests';
-import { addQuestionDoc } from '@/firebase/collections/questions';
+import { createTest } from '@/firebase/api/create-test';
+import { useUser } from '@clerk/nextjs';
+import { toast, useToast } from '@/components/ui/use-toast';
 
 const BuildTest = () => {
+	const { user } = useUser();
+	const { toast } = useToast();
+
 	return (
 		<div className='container h-full'>
 			<h1 className='text-center text-3xl mb-5'>Build Test</h1>
 
 			<TestForm
-				onSubmit={async (data) => {
-					const testId = await addTestDoc({
-						title: data.title,
-						topic: data.topic,
-					});
-					if (!testId) return;
-
-					data.questions.map(async (question) => {
-						const questionId = await addQuestionDoc(testId, {
-							text: question.text,
-							options: question.options,
-							type: question.type,
+				onSubmit={async ({ questions, ...test }) => {
+					if (!user) {
+						return toast({
+							variant: 'destructive',
+							title: 'Something went wrong!',
+							description: 'You must be signed in to create test',
 						});
+					}
 
-            console.log(questionId)
-					});
-					console.log(testId);
+					await createTest({ createdBy: user.id, ...test }, questions);
 				}}
 			/>
 		</div>

@@ -10,7 +10,6 @@ export async function createTest(test: AddTest, questions: Array<AddQuestion>) {
 		const batch = writeBatch(firestore);
 
 		const testDoc = doc(collection(firestore, COLLECTION.TESTS));
-        console.log(testDoc.id)
 		batch.set(testDoc, test);
 
 		questions.forEach((question) => {
@@ -21,9 +20,9 @@ export async function createTest(test: AddTest, questions: Array<AddQuestion>) {
 			batch.set(questionDoc, question);
 		});
 
-		await batch.commit();
+		await batch.commit()
 	} catch (error) {
-        console.log(error)
+        
 		toast({
 			variant: 'destructive',
 			title: 'Uh oh! Something went wrong.',

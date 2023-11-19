@@ -48,8 +48,9 @@ const TestForm = ({ onSubmit }: Props) => {
 			<Form {...formController}>
 				<form
 					className='px-20 h-full flex flex-col'
-					onSubmit={handleSubmit((data) => {
-						onSubmit?.(data);
+					onSubmit={handleSubmit(async (data) => {
+						await onSubmit?.(data);
+
 						reset();
 					})}
 				>
