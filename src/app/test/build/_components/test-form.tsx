@@ -24,6 +24,7 @@ import { testTopics, testTopicsNames } from '@/constants/testTopics';
 
 import QuestionsSection from './questions-section';
 import { twMerge } from 'tailwind-merge';
+import Spinner from '@/components/ui/spinner';
 
 type Props = {
 	onSubmit?: (data: TestFormData) => void;
@@ -41,7 +42,7 @@ const TestForm = ({ onSubmit, className }: Props) => {
 		control,
 		handleSubmit,
 		reset,
-		formState: { errors },
+		formState: { errors, isSubmitting },
 	} = formController;
 	const questions = formController.watch('questions');
 
@@ -114,11 +115,13 @@ const TestForm = ({ onSubmit, className }: Props) => {
 					</div>
 
 					<Button
-						className='block mx-auto mt-20'
+						className=' flex items-center gap-2  mx-auto mt-20'
 						size={'lg'}
 						type='submit'
+						disabled={isSubmitting}
 					>
-						Submit
+						{isSubmitting && <Spinner className='fill-primary-foreground' />}
+						<p>Send</p>
 					</Button>
 				</form>
 			</Form>
