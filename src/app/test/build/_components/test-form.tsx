@@ -35,6 +35,8 @@ const TestForm = ({ onSubmit, className }: Props) => {
 	const formController = useForm<TestFormData>({
 		resolver: zodResolver(testFormSchema),
 		defaultValues: {
+			title: '',
+			topic: 'ai',
 			questions: [],
 		},
 	});
@@ -66,10 +68,7 @@ const TestForm = ({ onSubmit, className }: Props) => {
 									<FormItem className='mb-5'>
 										<FormLabel>Title</FormLabel>
 										<FormControl>
-											<Input
-												placeholder='title'
-												{...field}
-											/>
+											<Input {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -79,12 +78,13 @@ const TestForm = ({ onSubmit, className }: Props) => {
 							<FormField
 								control={control}
 								name='topic'
-								render={({ field }) => (
+								render={({ field: { onChange, value, ...field } }) => (
 									<FormItem className=''>
 										<FormLabel>Topic</FormLabel>
 										<Select
-											onValueChange={field.onChange}
-											defaultValue={field.value}
+											onValueChange={onChange}
+											value={value}
+											{...field}
 										>
 											<FormControl>
 												<SelectTrigger>
@@ -113,6 +113,12 @@ const TestForm = ({ onSubmit, className }: Props) => {
 
 						<QuestionsSection questions={questions} />
 					</div>
+					<Button
+						onClick={() => reset()}
+						type='button'
+					>
+						reset
+					</Button>
 
 					<Button
 						className=' flex items-center gap-2  mx-auto mt-20'
