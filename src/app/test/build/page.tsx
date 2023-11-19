@@ -11,10 +11,11 @@ const BuildTest = () => {
 	const { toast } = useToast();
 
 	return (
-		<div className='container h-full'>
+		<div className='container h-full flex flex-col'>
 			<h1 className='text-center text-3xl mb-5'>Build Test</h1>
 
 			<TestForm
+				className={'flex-1 mb-5'}
 				onSubmit={async ({ questions, ...test }) => {
 					if (!user) {
 						return toast({

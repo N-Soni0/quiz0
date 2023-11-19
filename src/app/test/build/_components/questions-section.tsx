@@ -9,7 +9,7 @@ type Props = {
 
 const QuestionsSection = ({ questions }: Props) => {
 	return (
-		<div className='w-full flex justify-center items-center flex-col'>
+		<div className='w-full flex items-center flex-col'>
 			<QuestionDialog index={questions.length}>
 				<Button
 					variant={'secondary'}

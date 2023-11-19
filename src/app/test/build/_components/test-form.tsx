@@ -23,12 +23,14 @@ import {
 import { testTopics, testTopicsNames } from '@/constants/testTopics';
 
 import QuestionsSection from './questions-section';
+import { twMerge } from 'tailwind-merge';
 
 type Props = {
 	onSubmit?: (data: TestFormData) => void;
+	className?: string;
 };
 
-const TestForm = ({ onSubmit }: Props) => {
+const TestForm = ({ onSubmit, className }: Props) => {
 	const formController = useForm<TestFormData>({
 		resolver: zodResolver(testFormSchema),
 		defaultValues: {
@@ -47,14 +49,14 @@ const TestForm = ({ onSubmit }: Props) => {
 		<FormProvider {...formController}>
 			<Form {...formController}>
 				<form
-					className='px-20 h-full flex flex-col'
+					className={twMerge('px-20 flex flex-col', className)}
 					onSubmit={handleSubmit(async (data) => {
 						await onSubmit?.(data);
 
 						reset();
 					})}
 				>
-					<div className='grid grid-cols-2 gap-10'>
+					<div className='flex-1 grid grid-cols-2 gap-10'>
 						<div className='flex flex-col '>
 							<FormField
 								control={control}
